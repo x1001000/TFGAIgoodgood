@@ -92,7 +92,7 @@ def response_factory(olami_resp):
 
 #    elif first_match['type'] == 'weather':
     else:
-        return response.WeatherResponse(response_text=first_match['desc_obj']['result'],
+        return response.WeatherResponse(response_text=first_match['desc_obj'].get('result','1001000<3'),#['result'],
                                         data_obj=first_match.get('data_obj'))
 
 #    else:
