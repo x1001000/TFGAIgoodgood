@@ -21,8 +21,12 @@ def handle_text_message(event):
                                    app.config['OLAMI_APP_SECRET'],
                                    cusid=event.source.user_id)
     try:
-        resp = olami_svc(event.message.text)
-        reply = resp.as_line_messages()
+        if 'TFGAI讚讚' == event.message.text:
+            reply = TextSendMessage(text='你也讚讚你全家都讚讚')
+        elif 'TFGAI讚讚' in event.message.text:
+            event.message.text = event.message.text.replace('TFGAI讚讚', '')
+            resp = olami_svc(event.message.text)
+            reply = resp.as_line_messages()
     except NlpServiceError as e:
         err_msg = 'NLP service is currently unavailable: {}'.format(repr(e))
         logger.error(err_msg)
