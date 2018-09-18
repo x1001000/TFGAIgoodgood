@@ -93,6 +93,10 @@ def response_factory(olami_resp):
     elif first_match['type'] == 'openweb':
         return response.openwebResponse(response_text=first_match['desc_obj']['result'],
                                       data_obj=first_match.get('data_obj'))
+    
+    elif first_match['type'] == 'selection':
+        return response.selectionResponse(response_text=first_match['desc_obj']['result'],
+                                      data_obj=first_match.get('data_obj'))
 
 #    elif first_match['type'] == 'weather':
     else:

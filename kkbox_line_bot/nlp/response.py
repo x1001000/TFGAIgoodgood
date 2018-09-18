@@ -97,6 +97,7 @@ class WeatherResponse(object):
     def as_line_messages(self):
         return [TextSendMessage(text=self.response_text)]
 
+
 class openwebResponse(object):
 
     def __init__(self, response_text, data_obj):
@@ -110,3 +111,37 @@ class openwebResponse(object):
 
     def as_line_messages(self):
         return [TextSendMessage(text=self.data_obj[0]['url'])]
+
+
+class selectionResponse(object):
+
+    def __init__(self, response_text, data_obj):
+        self.response_text = response_text
+        self.data_obj = data_obj
+
+    def __repr__(self):
+        return '<selectionResponse object: response_text = {}, data_obj = {}>'.format(
+                self.response_text,
+                reprlib.repr(self.data_obj))
+
+    def as_line_messages(self):
+        response_msg = TextSendMessage(text=self.response_text)
+        template_msg = self._create_template_message() if self.data_obj else None
+        return [response_msg, template_msg] if template_msg else [response_msg]
+
+    def _create_template_message(self):
+        return TemplateSendMessage(alt_text='selection Result',
+                                   template=CarouselTemplate(self._get_carousel_columns(),
+                                                             image_aspect_ratio='square'))
+
+    def _get_carousel_columns(self):
+        return [CarouselColumn(thumbnail_image_url=selection_obj['image_url'],
+                               title=self.reduce_string_length(selection_obj['title'], 40),
+                               text=self.reduce_string_length(selection_obj['detail'], 60),
+                               actions=[URITemplateAction(label='讚讚的傳送門',
+                                                          uri=selection_obj['ref_url'])])
+                for selection_obj in self.data_obj]
+
+    @staticmethod
+    def reduce_string_length(s, size):
+        return s[:size-1] + '…' if len(s) > size else s
