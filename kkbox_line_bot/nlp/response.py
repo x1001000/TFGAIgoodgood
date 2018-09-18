@@ -127,7 +127,7 @@ class selectionResponse(object):
     def as_line_messages(self):
         response_msg = TextSendMessage(text=self.response_text)
         template_msg = self._create_template_message() if self.data_obj else None
-        return [response_msg, template_msg] if template_msg else [response_msg]
+        return [template_msg]#[response_msg, template_msg] if template_msg else [response_msg]
 
     def _create_template_message(self):
         return TemplateSendMessage(alt_text='selection Result',
