@@ -98,6 +98,21 @@ class WeatherResponse(object):
         return [TextSendMessage(text=self.response_text)]
 
 
+class mathResponse(object):
+
+    def __init__(self, response_text, data_obj):
+        self.response_text = response_text
+        self.data_obj = data_obj
+
+    def __repr__(self):
+        return '<mathResponse object: response_text = {}, data_obj = {}>'.format(
+                self.response_text,
+                reprlib.repr(self.data_obj))
+
+    def as_line_messages(self):
+        return [TextSendMessage(text=self.data_obj[0]['result'] if self.data_obj else '1001000<3')]
+
+
 class jokeResponse(object):
 
     def __init__(self, response_text, data_obj):

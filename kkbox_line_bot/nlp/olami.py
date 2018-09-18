@@ -90,6 +90,10 @@ def response_factory(olami_resp):
         return response.KKBOXResponse(response_text=first_match['desc_obj']['result'],
                                       data_obj=first_match.get('data_obj'))
     
+    elif first_match['type'] == 'math':
+        return response.mathResponse(response_text=first_match['desc_obj']['result'],
+                                      data_obj=first_match.get('data_obj'))
+    
     elif first_match['type'] == 'joke':
         return response.jokeResponse(response_text=first_match['desc_obj']['result'],
                                       data_obj=first_match.get('data_obj'))
