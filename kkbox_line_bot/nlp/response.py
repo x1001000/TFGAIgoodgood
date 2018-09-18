@@ -40,7 +40,7 @@ class NotImplementedResponse(object):
 class QuestionResponse(object):
 
     def __init__(self, response_text):
-        self.response_text = response_text
+        self.response_text = response_text.replace('主人，', '')
 
     def __repr__(self):
         return '<QuestionResponse object: response_text={}>'.format(self.response_text)
