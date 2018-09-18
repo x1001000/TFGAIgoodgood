@@ -130,7 +130,7 @@ class selectionResponse(object):
         return [template_msg]#[response_msg, template_msg] if template_msg else [response_msg]
 
     def _create_template_message(self):
-        return TemplateSendMessage(alt_text='selection Result',
+        return TemplateSendMessage(alt_text='讚讚的傳送門們',
                                    template=CarouselTemplate(self._get_carousel_columns(),
                                                              image_aspect_ratio='square'))
 
