@@ -1,4 +1,4 @@
-whois = {
+the_most = {
     '嗆':'大黃瓜彭安安',
     '萌':'小雞',
     '邊':'百千',}
@@ -27,7 +27,11 @@ def handle_text_message(event):
                                    cusid=event.source.user_id)
     try:
         if '北一誰最' in event.message.text:
-            reply = TextSendMessage(text=whois[event.message.text.split('北一誰最')[1][0]])
+            try:
+                who = the_most.get(event.message.text.split('北一誰最')[1][0], '不好說 :)')
+            except:
+                who = '蛤？'
+            reply = TextSendMessage(text=who)
         elif 'TFGAI讚讚' == event.message.text.strip():
             reply = TextSendMessage(text='你也讚讚你全家都讚讚')
         elif 'TFGAI讚讚' in event.message.text:
