@@ -21,4 +21,5 @@ def load_production():
     return {'LINE_CHANNEL_ACCESS_TOKEN': getenv_raise('LINE_CHANNEL_ACCESS_TOKEN'),
             'LINE_CHANNEL_SECRET': getenv_raise('LINE_CHANNEL_SECRET'),
             'OLAMI_APP_KEY': getenv_raise('OLAMI_APP_KEY'),
-            'OLAMI_APP_SECRET': getenv_raise('OLAMI_APP_SECRET')}
+            'OLAMI_APP_SECRET': getenv_raise('OLAMI_APP_SECRET')
+            'GOOGLE_SHEETS': getenv_raise('GOOGLE_SHEETS')}
