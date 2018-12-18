@@ -1,7 +1,8 @@
 the_most = {
     '嗆':'大黃瓜彭安安',
     '萌':'小雞',
-    '邊':'百千',}
+    '邊':'百千',
+    '北七':'妳啊'}
 
 import logging
 
@@ -28,7 +29,10 @@ def handle_text_message(event):
     try:
         if '北一誰最' in event.message.text:
             try:
-                who = the_most.get(event.message.text.split('北一誰最')[1][0], '不好說 :)')
+                adj = event.message.text.split('北一誰最')[1]
+                adj = adj.split('？')[0]
+                adj = adj.split('?')[0]
+                who = the_most.get(adj, '不好說 ┐(´д`)┌')
             except:
                 who = '蛤？'
             reply = TextSendMessage(text=who)
