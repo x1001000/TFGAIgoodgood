@@ -22,7 +22,11 @@ def handle_text_message(event):
                                    app.config['OLAMI_APP_SECRET'],
                                    cusid=event.source.user_id)
     try:
-        if '北一誰最' in event.message.text:
+        if '北一最' in event.message.text:
+            adj, who = event.message.text.split('北一最')[1].split('=')
+            requests.get(app.config['GOOGLE_SHEETS']+'?'+adj+'='+who)
+            reply = TextSendMessage(text='True!')
+        elif '北一誰最' in event.message.text:
             adj = event.message.text.split('北一誰最')[1]
             adj = adj.split('？')[0]
             adj = adj.split('?')[0]
