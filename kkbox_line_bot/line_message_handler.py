@@ -61,6 +61,6 @@ def handle_text_message(event):
         logger.exception(err_msg)
         reply = TextSendMessage(text=err_msg)
     finally:
-        requests.get(app.config['GOOGLE_SHEETS']+event.message.text)
+        #requests.get(app.config['GOOGLE_SHEETS']+event.message.text)
         logger.info('Reply: {}'.format(reply))
         line_bot_api.reply_message(event.reply_token, reply)
