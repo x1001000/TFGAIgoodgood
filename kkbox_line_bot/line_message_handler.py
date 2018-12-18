@@ -1,4 +1,5 @@
 the_most = {
+    '':'最？',
     '嗆':'大黃瓜彭安安',
     '萌':'小雞',
     '邊':'百千',
@@ -30,13 +31,10 @@ def handle_text_message(event):
                                    cusid=event.source.user_id)
     try:
         if '北一誰最' in event.message.text:
-            try:
-                adj = event.message.text.split('北一誰最')[1]
-                adj = adj.split('？')[0]
-                adj = adj.split('?')[0]
-                who = the_most.get(adj, '不好說 ┐(´д`)┌')
-            except:
-                who = '蛤？'
+            adj = event.message.text.split('北一誰最')[1]
+            adj = adj.split('？')[0]
+            adj = adj.split('?')[0]
+            who = the_most.get(adj, '不好說 ┐(´д`)┌')
             reply = TextSendMessage(text=who)
         elif 'TFGAI讚讚' == event.message.text.strip():
             reply = TextSendMessage(text='你也讚讚你全家都讚讚')
