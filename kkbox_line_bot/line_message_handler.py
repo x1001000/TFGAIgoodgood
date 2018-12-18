@@ -1,12 +1,4 @@
-the_most = {
-    '':'最？',
-    '嗆':'大黃瓜彭安安',
-    '萌':'小雞',
-    '邊':'百千',
-    '北七':'妳啊不然咧😂'}
-
 import requests
-
 import logging
 
 
@@ -34,7 +26,7 @@ def handle_text_message(event):
             adj = event.message.text.split('北一誰最')[1]
             adj = adj.split('？')[0]
             adj = adj.split('?')[0]
-            who = the_most.get(adj, '不好說 ┐(´д`)┌')
+            who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
             reply = TextSendMessage(text=who)
         elif 'TFGAI讚讚' == event.message.text.strip():
             reply = TextSendMessage(text='你也讚讚你全家都讚讚')
