@@ -35,16 +35,16 @@ def handle_text_message(event):
         elif 'TFGAI讚讚' == event.message.text.strip():
             reply = TextSendMessage(text='你也讚讚你全家都讚讚')
         elif 'TFGAI讚讚' in event.message.text:
-            event.message.text = event.message.text.replace('TFGAI讚讚', '')
-            resp = olami_svc(event.message.text)
+            text = event.message.text.replace('TFGAI讚讚', '')
+            resp = olami_svc(text)
             reply = resp.as_line_messages()
         elif '讚讚' in event.message.text:
-            event.message.text = event.message.text.replace('讚讚', '')
-            resp = olami_svc(event.message.text)
+            text = event.message.text.replace('讚讚', '')
+            resp = olami_svc(text)
             reply = resp.as_line_messages()
         elif '，' == event.message.text[0]:
-            event.message.text = event.message.text[1:]
-            resp = olami_svc(event.message.text)
+            text = event.message.text[1:]
+            resp = olami_svc(text)
             reply = resp.as_line_messages()
     except NlpServiceError as e:
         err_msg = 'NLP service is currently unavailable: {}'.format(repr(e))
