@@ -34,7 +34,9 @@ def handle_text_message(event):
             who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
             reply = TextSendMessage(text=who)
         elif 'TFGAI讚讚' == event.message.text.strip():
-            reply = TextSendMessage(text='你也讚讚你全家都讚讚')
+            reply = TextSendMessage(text='你也讚讚！你全家都讚讚！')
+        elif '讚讚' == event.message.text.strip():
+            reply = TextSendMessage(text='超讚！')
         elif 'TFGAI讚讚' in event.message.text:
             text = event.message.text.replace('TFGAI讚讚', '')
             resp = olami_svc(text)
