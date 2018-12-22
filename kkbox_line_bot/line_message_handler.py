@@ -28,6 +28,7 @@ def handle_text_message(event):
             reply = TextSendMessage(text='就是啊！')
         elif '北一誰最' in event.message.text:
             adj = event.message.text.split('北一誰最')[1]
+            adj = adj.split('嗎')[0]
             adj = adj.split('？')[0]
             adj = adj.split('?')[0]
             who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
