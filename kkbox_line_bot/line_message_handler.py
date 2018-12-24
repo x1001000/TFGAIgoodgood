@@ -24,7 +24,7 @@ def handle_text_message(event):
     try:
         if '北一最' in event.message.text:
             adj = event.message.text.split('北一最')[1]
-            adj = adj.split('是')[0].split('嗎')[0].split('？')[0].split('?')[0]
+            adj = adj.split('是')[0].split('誰')[0].split('嗎')[0].split('？')[0].split('?')[0]
             try:
                 adj, who = adj.split('=')
                 requests.get(app.config['GOOGLE_SHEETS']+'?'+adj+'='+who)
@@ -34,7 +34,7 @@ def handle_text_message(event):
                 reply = TextSendMessage(text=who)
         elif '北一誰最' in event.message.text:
             adj = event.message.text.split('北一誰最')[1]
-            adj = adj.split('是')[0].split('嗎')[0].split('？')[0].split('?')[0]
+            adj = adj.split('是')[0].split('誰')[0].split('嗎')[0].split('？')[0].split('?')[0]
             try:
                 adj, who = adj.split('=')
                 requests.get(app.config['GOOGLE_SHEETS']+'?'+adj+'='+who)
