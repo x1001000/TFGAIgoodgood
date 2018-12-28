@@ -20,8 +20,7 @@ class ErrorResponse(object):
                 self.status_code)
 
     def as_line_messages(self):
-        return [TextSendMessage(text='ʕ•ᴥ•ʔ')]
-#        return [TextSendMessage(text=self.response_text)],
+        return [TextSendMessage(text=self.response_text)]#,
 #                TextSendMessage(text='DEBUG: status_code={}'.format(self.status_code))]
 
 
