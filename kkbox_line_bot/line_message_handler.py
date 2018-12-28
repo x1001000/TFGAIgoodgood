@@ -28,7 +28,7 @@ def handle_text_message(event):
             try:
                 adj, who = adj.split('=')
                 requests.get(app.config['GOOGLE_SHEETS']+'?'+adj+'='+who)
-                reply = TextSendMessage(text='就是啊！')
+                reply = TextSendMessage(text='嗯哼！')
             except:
                 who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
                 reply = TextSendMessage(text=who)
@@ -38,7 +38,7 @@ def handle_text_message(event):
             try:
                 adj, who = adj.split('=')
                 requests.get(app.config['GOOGLE_SHEETS']+'?'+adj+'='+who)
-                reply = TextSendMessage(text='就是啊！')
+                reply = TextSendMessage(text='嗯哼！')
             except:
                 who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
                 reply = TextSendMessage(text=who)
