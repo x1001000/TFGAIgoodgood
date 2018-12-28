@@ -110,7 +110,7 @@ class mathResponse(object):
                 reprlib.repr(self.data_obj))
 
     def as_line_messages(self):
-        return [TextSendMessage(text=self.data_obj[0]['result'] if self.data_obj else '1001000<3')]
+        return [TextSendMessage(text=self.data_obj[0]['result'] if self.data_obj else self.response_text)]
 
 
 class jokeResponse(object):
