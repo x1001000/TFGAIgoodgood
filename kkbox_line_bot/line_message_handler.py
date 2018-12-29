@@ -68,6 +68,6 @@ def handle_text_message(event):
         reply = TextSendMessage(text=err_msg)
     finally:
         data = {'user_id':event.source.user_id, 'text':event.message.text}
-        requests.post(app.config['GOOGLE_SHEETS'], data=str(data).encode())
+        requests.post(app.config['GOOGLE_SHEETS'], data=data)
         logger.info('Reply: {}'.format(reply))
         line_bot_api.reply_message(event.reply_token, reply)
