@@ -22,18 +22,8 @@ def handle_text_message(event):
                                    app.config['OLAMI_APP_SECRET'],
                                    cusid=event.source.user_id)
     try:
-        if '北一最' in event.message.text:
-            adj = event.message.text.split('北一最')[1]
-            adj = adj.split('是')[0].split('誰')[0].split('嗎')[0].split('？')[0].split('?')[0]
-            try:
-                adj, who = adj.split('=')
-                requests.get(app.config['GOOGLE_SHEETS']+'?'+adj+'='+(who if who else 'instagr.am/1001000.io'))
-                reply = TextSendMessage(text='嗯哼！')
-            except:
-                who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
-                reply = TextSendMessage(text=who)
-        elif '北一誰最' in event.message.text:
-            adj = event.message.text.split('北一誰最')[1]
+        if '北一最' in event.message.text or '北一誰最' in event.message.text:
+            adj = event.message.text.split('最')[1]
             adj = adj.split('是')[0].split('誰')[0].split('嗎')[0].split('？')[0].split('?')[0]
             try:
                 adj, who = adj.split('=')
