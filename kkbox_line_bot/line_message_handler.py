@@ -27,7 +27,7 @@ def handle_text_message(event):
             adj = adj.split('是')[0].split('誰')[0].split('嗎')[0].split('？')[0].split('?')[0]
             try:
                 adj, who = adj.split('=')
-                requests.get(app.config['GOOGLE_SHEETS']+'?'+adj+'='+who if who else 'instagr.am/1001000.io')
+                requests.get(app.config['GOOGLE_SHEETS']+'?'+adj+'='+(who if who else 'instagr.am/1001000.io'))
                 reply = TextSendMessage(text='嗯哼！')
             except:
                 who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
@@ -37,7 +37,7 @@ def handle_text_message(event):
             adj = adj.split('是')[0].split('誰')[0].split('嗎')[0].split('？')[0].split('?')[0]
             try:
                 adj, who = adj.split('=')
-                requests.get(app.config['GOOGLE_SHEETS']+'?'+adj+'='+who if who else 'instagr.am/1001000.io')
+                requests.get(app.config['GOOGLE_SHEETS']+'?'+adj+'='+(who if who else 'instagr.am/1001000.io'))
                 reply = TextSendMessage(text='嗯哼！')
             except:
                 who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
