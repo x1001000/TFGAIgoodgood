@@ -24,7 +24,7 @@ def handle_text_message(event):
     try:
         if '北一最' in event.message.text or '北一誰最' in event.message.text:
             adj = event.message.text.split('最')[1]
-            for x in '的是誰啊嗎？?':
+            for x in '的是誰啊阿ㄚ嗎嘛ㄇ？?':
                 adj = adj.split(x)[0]
             if '=' in adj or '＝' in adj:
                 adj, who = adj.split('=' if '=' in adj else '＝')
