@@ -58,10 +58,12 @@ def handle_text_message(event):
         logger.exception(err_msg)
         reply = TextSendMessage(text=err_msg)
     finally:
-        payload = {
-            'user_id':event.source.user_id,
-            'group_id':event.source.group_id,
-            'text':event.message.text}
+        payload = {'text':event.message.text, 'user_id':event.source.user_id}
+        try:
+            payload['group_id'] = event.source.group_id
+            payload['room_id'] = event.source.room_id
+        except:
+            pass
         requests.post(app.config['GOOGLE_SHEETS'], data=payload)
         logger.info('Reply: {}'.format(reply))
         line_bot_api.reply_message(event.reply_token, reply)
