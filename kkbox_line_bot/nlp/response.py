@@ -86,7 +86,7 @@ class KKBOXResponse(object):
 class WeatherResponse(object):
 
     def __init__(self, response_text, data_obj):
-        self.response_text = response_text
+        self.response_text = response_text.replace('歐拉蜜', '讚讚')
         self.data_obj = data_obj
 
     def __repr__(self):
