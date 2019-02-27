@@ -1,7 +1,6 @@
 import requests
 import logging
 
-
 from kkbox_line_bot import app
 from kkbox_line_bot.nlp import olami
 from kkbox_line_bot.nlp.error import NlpServiceError
@@ -21,10 +20,14 @@ def handle_text_message(event):
     olami_svc = olami.OlamiService(app.config['OLAMI_APP_KEY'],
                                    app.config['OLAMI_APP_SECRET'],
                                    cusid=None)#event.source.user_id)
+    msg_txt = event.message.text.strip()
     try:
-        if '北一最' in event.message.text or '北一誰最' in event.message.text:
-            adj = event.message.text.split('最')[1]
-            for x in '的是誰啊阿ㄚ嗎嘛ㄇ？?':
+        if msg_txt == '讚讚' or msg_txt == 'TFGAI讚讚':
+            reply = TextSendMessage(text='有！')
+            reply = TextSendMessage(text='你也讚讚！你全家都讚讚！')
+        elif '北一最' in msg_txt or '北一誰最' in msg_txt:
+            adj = msg_txt.split('最')[1]
+            for x in '的是誰啊阿ㄚ嗎嘛ㄇ讚讚？?':
                 adj = adj.split(x)[0]
             if '=' in adj or '＝' in adj:
                 adj, who = adj.split('=' if '=' in adj else '＝')
@@ -33,21 +36,11 @@ def handle_text_message(event):
             else:
                 who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
                 reply = TextSendMessage(text=who)
-        elif 'TFGAI讚讚' == event.message.text.strip():
-            reply = TextSendMessage(text='你也讚讚！你全家都讚讚！')
-        elif '讚讚' == event.message.text.strip():
-            reply = TextSendMessage(text='有！')
-        elif 'TFGAI讚讚' in event.message.text:
-            text = event.message.text.replace('TFGAI讚讚', '')
-            resp = olami_svc(text)
+        elif '讚讚' in msg_txt or 'TFGAI讚讚' in msg_txt:
+            resp = olami_svc(msg_txt.replace('TFGAI讚讚', '').replace('讚讚', ''))
             reply = resp.as_line_messages()
-        elif '讚讚' in event.message.text:
-            text = event.message.text.replace('讚讚', '')
-            resp = olami_svc(text)
-            reply = resp.as_line_messages()
-        elif '，' == event.message.text[0]:
-            text = event.message.text[1:]
-            resp = olami_svc(text)
+        elif msg_txt[0] == ',' or msg_txt[0] == '，':
+            resp = olami_svc(msg_txt[1:])
             reply = resp.as_line_messages()
     except NlpServiceError as e:
         err_msg = 'NLP service is currently unavailable: {}'.format(repr(e))
@@ -58,7 +51,7 @@ def handle_text_message(event):
         logger.exception(err_msg)
         reply = TextSendMessage(text=err_msg)
     finally:
-        payload = {'text':event.message.text, 'user_id':event.source.user_id}
+        payload = {'text':msg_txt, 'user_id':event.source.user_id}
         try:
             payload['group_id'] = event.source.group_id
         except:
