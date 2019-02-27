@@ -20,7 +20,7 @@ def handle_text_message(event):
     logger.debug('event: ' + str(event))
     olami_svc = olami.OlamiService(app.config['OLAMI_APP_KEY'],
                                    app.config['OLAMI_APP_SECRET'],
-                                   cusid=event.source.user_id)
+                                   cusid=None)#event.source.user_id)
     try:
         if '北一最' in event.message.text or '北一誰最' in event.message.text:
             adj = event.message.text.split('最')[1]
