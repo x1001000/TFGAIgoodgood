@@ -23,8 +23,7 @@ def handle_text_message(event):
     msg_txt = event.message.text.strip()
     try:
         if msg_txt == '讚讚' or msg_txt == 'TFGAI讚讚':
-            reply = TextSendMessage(text='有！')
-            reply = TextSendMessage(text='你也讚讚！你全家都讚讚！')
+            reply = TextSendMessage(text='有！' if msg_txt == '讚讚' else '你也讚讚！你全家都讚讚！')
         elif '北一最' in msg_txt or '北一誰最' in msg_txt:
             adj = msg_txt.split('最')[1]
             for x in '的是誰啊阿ㄚ嗎嘛ㄇ讚讚？?':
