@@ -155,7 +155,7 @@ class selectionResponse(object):
                 reprlib.repr(self.data_obj))
 
     def as_line_messages(self):
-        response_msg = TextSendMessage(text=str(self.data_obj)#self.response_text)
+        response_msg = TextSendMessage(text=str(self.data_obj))#self.response_text)
         template_msg = self._create_template_message() if self.data_obj else None
         return [response_msg]#, template_msg] #if template_msg else [response_msg]
 
