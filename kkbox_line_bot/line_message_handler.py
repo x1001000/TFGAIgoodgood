@@ -26,7 +26,7 @@ def handle_text_message(event):
             reply = TextSendMessage(text=choice(hi))
         elif '北一最' in msg_txt or '北一誰最' in msg_txt:
             adj = msg_txt.split('最')[1]
-            for x in '的是誰啊阿ㄚ嗎嘛ㄇ讚讚？?':
+            for x in '的是誰呢ㄋ啊阿ㄚ嗎嘛ㄇ讚讚？?':
                 adj = adj.split(x)[0]
             if '=' in adj or '＝' in adj:
                 adj, who = adj.split('=' if '=' in adj else '＝')
