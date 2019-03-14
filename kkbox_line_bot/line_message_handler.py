@@ -77,4 +77,12 @@ def handle_content_message(event):
     else:
         return
     payload = {'text':event.message.id+ext, 'user_id':event.source.user_id}
+    try:
+        payload['group_id'] = event.source.group_id
+    except:
+        pass
+    try:
+        payload['room_id'] = event.source.room_id
+    except:
+        pass
     requests.post(app.config['GOOGLE_SHEETS'], data=payload)
