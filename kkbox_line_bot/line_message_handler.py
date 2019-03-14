@@ -6,7 +6,7 @@ from kkbox_line_bot.nlp import olami
 from kkbox_line_bot.nlp.error import NlpServiceError
 
 from linebot import LineBotApi, WebhookHandler
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageMessage, VideoMessage, AudioMessage
 
 logger = logging.getLogger(__name__)
 
@@ -65,3 +65,16 @@ def handle_text_message(event):
         requests.post(app.config['GOOGLE_SHEETS'], data=payload)
         logger.info('Reply: {}'.format(reply))
         line_bot_api.reply_message(event.reply_token, reply)
+
+@webhook_handler.add(MessageEvent, message=(ImageMessage, VideoMessage, AudioMessage))
+def handle_content_message(event):
+    if isinstance(event.message, ImageMessage):
+        ext = '.jpg'
+    elif isinstance(event.message, VideoMessage):
+        ext = '.mp4'
+    elif isinstance(event.message, AudioMessage):
+        ext = '.m4a'
+    else:
+        return
+    payload = {'text':event.message.id+ext, 'user_id':event.source.user_id}
+    requests.post(app.config['GOOGLE_SHEETS'], data=payload)
