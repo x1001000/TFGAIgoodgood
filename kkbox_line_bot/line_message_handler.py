@@ -16,11 +16,12 @@ webhook_handler = WebhookHandler(app.config['LINE_CHANNEL_SECRET'])
 hi = ['有！', '你也讚讚！你全家都讚讚！', '安安你好我是讚讚', '嗯哼！']
 @webhook_handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
-    logger.debug('event: ' + str(event))
+    logger.debug(u'event: ' + str(event))
     olami_svc = olami.OlamiService(app.config['OLAMI_APP_KEY'],
                                    app.config['OLAMI_APP_SECRET'],
                                    cusid=None)#event.source.user_id)
     msg_txt = event.message.text.strip()
+    reply = None
     try:
         if msg_txt == '讚讚' or msg_txt == 'TFGAI讚讚':
             reply = TextSendMessage(text=choice(hi))
@@ -63,8 +64,9 @@ def handle_text_message(event):
         except:
             pass
         requests.post(app.config['GOOGLE_SHEETS'], data=payload)
-        logger.info('Reply: {}'.format(reply))
-        line_bot_api.reply_message(event.reply_token, reply)
+        if reply:
+            logger.info(u'Reply: {}'.format(reply))
+            line_bot_api.reply_message(event.reply_token, reply)
 
 @webhook_handler.add(MessageEvent, message=(ImageMessage, VideoMessage, AudioMessage))
 def handle_content_message(event):
