@@ -23,7 +23,7 @@ def handle_text_message(event):
     msg_txt = event.message.text.strip()
     reply = None
     try:
-        if event.source.group_id == 'C0ab84787052d0751ff2838e4e52f0afc':
+        if event.source.user_id == 'U277d1a8cf7717e27e5d7d46971a64f65':
             reply = ImageSendMessage(
                 original_content_url='https://www.1001000.io/img/cucumber.gif',
                 preview_image_url='https://www.1001000.io/img/cucumber.gif')
