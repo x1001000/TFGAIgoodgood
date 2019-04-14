@@ -6,7 +6,7 @@ from kkbox_line_bot.nlp import olami
 from kkbox_line_bot.nlp.error import NlpServiceError
 
 from linebot import LineBotApi, WebhookHandler
-from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageMessage, VideoMessage, AudioMessage
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageMessage, ImageSendMessage, VideoMessage, AudioMessage
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +23,11 @@ def handle_text_message(event):
     msg_txt = event.message.text.strip()
     reply = None
     try:
-        if msg_txt == '讚讚' or msg_txt == 'TFGAI讚讚':
+        if event.source.group_id == 'C0ab84787052d0751ff2838e4e52f0afc':
+            reply = ImageSendMessage(
+                original_content_url='https://www.1001000.io/img/cucumber.gif',
+                preview_image_url='https://www.1001000.io/img/cucumber.gif')
+        elif msg_txt == '讚讚' or msg_txt == 'TFGAI讚讚':
             reply = TextSendMessage(text=choice(hi))
         elif '北一最' in msg_txt or '北一誰最' in msg_txt:
             adj = msg_txt.split('最')[1]
