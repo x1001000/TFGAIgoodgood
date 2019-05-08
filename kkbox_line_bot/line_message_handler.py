@@ -6,7 +6,7 @@ from kkbox_line_bot.nlp import olami
 from kkbox_line_bot.nlp.error import NlpServiceError
 
 from linebot import LineBotApi, WebhookHandler
-from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageMessage, ImageSendMessage, VideoMessage, AudioMessage
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageMessage, ImageSendMessage, VideoMessage, VideoSendMessage, AudioMessage
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ def handle_text_message(event):
                 original_content_url='https://www.1001000.io/img/cucumber.gif',
                 preview_image_url='https://www.1001000.io/img/cucumber.jpg')
         elif '發財' in msg_txt or '發大財' in msg_txt:
-            reply = ImageSendMessage(
+            reply = VideoSendMessage(
                 original_content_url='https://www.1001000.io/img/whiteeye.gif',
                 preview_image_url='https://www.1001000.io/img/whiteeye.gif')
         elif msg_txt == '讚讚' or msg_txt == 'TFGAI讚讚':
