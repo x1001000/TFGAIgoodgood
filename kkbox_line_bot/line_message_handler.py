@@ -26,7 +26,8 @@ def handle_text_message(event):
         if event.source.group_id == 'C0ab84787052d0751ff2838e4e52f0afc':
             reply = ImageSendMessage(
                 original_content_url='https://www.1001000.io/img/cucumber.gif',
-                #preview_image_url='https://www.1001000.io/img/cucumber.jpg')
+                #preview_image_url='https://www.1001000.io/img/cucumber.jpg'
+                )
         elif '發財' in msg_txt or '發大財' in msg_txt:
             reply = ImageSendMessage(
                 original_content_url='https://www.1001000.io/img/whiteeye.gif',
