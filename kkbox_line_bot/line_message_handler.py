@@ -27,11 +27,11 @@ def handle_text_message(event):
         #    reply = ImageSendMessage(
         #        original_content_url='https://www.1001000.io/img/cucumber.gif',
         #        preview_image_url='https://www.1001000.io/img/cucumber.jpg')
-        if '發財' in msg_txt or '發大財' in msg_txt:
-            reply = ImageSendMessage(
-                original_content_url='https://www.1001000.io/img/whiteeye.gif',
-                preview_image_url='https://www.1001000.io/img/whiteeye.gif')
-        elif msg_txt == '讚讚' or msg_txt == 'TFGAI讚讚':
+        #if '發財' in msg_txt or '發大財' in msg_txt:
+        #    reply = ImageSendMessage(
+        #        original_content_url='https://www.1001000.io/img/whiteeye.gif',
+        #        preview_image_url='https://www.1001000.io/img/whiteeye.gif')
+        if msg_txt == '讚讚' or msg_txt == 'TFGAI讚讚':
             reply = TextSendMessage(text=choice(hi))
         elif '北一最' in msg_txt or '北一誰最' in msg_txt:
             adj = msg_txt.split('最')[1]
@@ -47,7 +47,7 @@ def handle_text_message(event):
             else:
                 who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
                 reply = TextSendMessage(text=who)
-        elif msg_txt[:2] in ['讚讚', '，，', ',,', '..']:
+        elif msg_txt[:2] == '讚讚' or msg_txt[0] in ['。', '.']:
             resp = olami_svc(msg_txt[2:])
             reply = resp.as_line_messages()
     except NlpServiceError as e:
