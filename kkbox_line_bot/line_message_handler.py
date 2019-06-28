@@ -47,7 +47,7 @@ def handle_text_message(event):
             else:
                 who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
                 reply = TextSendMessage(text=who)
-        elif msg_txt[:2] == '讚讚' or msg_txt[0] in ['。', '.']:
+        elif msg_txt[:2] == '讚讚':
             resp = olami_svc(msg_txt[2:])
             reply = resp.as_line_messages()
     except NlpServiceError as e:
