@@ -50,6 +50,7 @@ def handle_text_message(event):
         elif msg_txt[:2] in ['讚讚', '阿信', '石頭', '怪獸', '冠佑', '瑪莎', '膺任', '百千']:
             resp = olami_svc(msg_txt[2:])
             reply = resp.as_line_messages()
+            reply = TextSendMessage(text=msg_txt[2:])
     except NlpServiceError as e:
         err_msg = 'NLP service is currently unavailable: {}'.format(repr(e))
         logger.error(err_msg)
