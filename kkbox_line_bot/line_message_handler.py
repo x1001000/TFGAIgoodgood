@@ -48,7 +48,7 @@ def handle_text_message(event):
                 who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
                 reply = TextSendMessage(text=who)
         elif msg_txt[:2] in ['讚讚', '阿信', '石頭', '怪獸', '冠佑', '瑪莎', '膺任', '百千']:
-            resp = olami_svc(msg_txt[2:])
+            #resp = olami_svc(msg_txt[2:])
             reply = TextSendMessage(text=msg_txt[2:])#resp.as_line_messages()
     except NlpServiceError as e:
         err_msg = 'NLP service is currently unavailable: {}'.format(repr(e))
