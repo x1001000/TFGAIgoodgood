@@ -50,10 +50,12 @@ def handle_text_message(event):
             else:
                 who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
                 reply = TextSendMessage(text=who)
-        elif '讚讚' in msg_txt:
+        if '讚讚' in msg_txt:
             #resp = olami_svc(msg_txt[2:])
             #reply = resp.as_line_messages()
             reply = TextSendMessage(text=ig())
+        if '口罩' in msg_txt:
+            reply = TextSendMessage(text='geobingan.info/#/event/mask')
     except NlpServiceError as e:
         err_msg = 'NLP service is currently unavailable: {}'.format(repr(e))
         logger.error(err_msg)
