@@ -28,20 +28,6 @@ def handle_text_message(event):
     msg_txt = event.message.text.strip()
     reply = None
     try:
-        #if event.source.user_id == 'U277d1a8cf7717e27e5d7d46971a64f65':
-        #    reply = ImageSendMessage(
-        #        original_content_url='https://www.1001000.io/img/cucumber.gif',
-        #        preview_image_url='https://www.1001000.io/img/cucumber.jpg')
-        #if '發財' in msg_txt or '發大財' in msg_txt:
-        #    reply = ImageSendMessage(
-        #        original_content_url='https://www.1001000.io/img/whiteeye.gif',
-        #        preview_image_url='https://www.1001000.io/img/whiteeye.gif')
-        if '讚讚' in msg_txt:
-            #resp = olami_svc(msg_txt[2:])
-            #reply = resp.as_line_messages()
-            reply = TextSendMessage(text=ig())
-        if '口罩' in msg_txt:
-            reply = TextSendMessage(text='geobingan.info/#/event/mask')
         if '北一最' in msg_txt or '北一誰最' in msg_txt:
             adj = msg_txt.split('最')[1]
             for x in '的是誰呢ㄋ啊阿ㄚ嗎嘛ㄇ？?':
@@ -56,6 +42,20 @@ def handle_text_message(event):
             else:
                 who = requests.get(app.config['GOOGLE_SHEETS']+'?'+adj).text
                 reply = TextSendMessage(text=who)
+        elif '口罩' in msg_txt:
+            reply = TextSendMessage(text='geobingan.info/#/event/mask')
+        elif '讚讚' in msg_txt:
+            reply = TextSendMessage(text=ig())
+            #resp = olami_svc(msg_txt[2:])
+            #reply = resp.as_line_messages()
+        #if event.source.user_id == 'U277d1a8cf7717e27e5d7d46971a64f65':
+        #    reply = ImageSendMessage(
+        #        original_content_url='https://www.1001000.io/img/cucumber.gif',
+        #        preview_image_url='https://www.1001000.io/img/cucumber.jpg')
+        #if '發財' in msg_txt or '發大財' in msg_txt:
+        #    reply = ImageSendMessage(
+        #        original_content_url='https://www.1001000.io/img/whiteeye.gif',
+        #        preview_image_url='https://www.1001000.io/img/whiteeye.gif')
     except NlpServiceError as e:
         err_msg = 'NLP service is currently unavailable: {}'.format(repr(e))
         logger.error(err_msg)
