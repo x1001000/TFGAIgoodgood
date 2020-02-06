@@ -17,7 +17,7 @@ def ig():
     for line in r.text.splitlines():
         if '>window._sharedData' in line:
             shortcode = random.choice(line.split('shortcode":"')[1:])[:11]
-            return f'instagr.am/p/{shortcode}'
+            return f'Instagr.am/p/{shortcode}'
 
 @webhook_handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
