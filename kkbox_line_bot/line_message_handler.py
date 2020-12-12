@@ -20,6 +20,7 @@ def ig():
         if '>window._sharedData' in line:
             shortcode = random.choice(line.split('shortcode":"')[1:])[:11]
             url = 'https://www.instagram.com/p/'+shortcode
+            return url
             r = requests.get(url, headers=headers)
             for line in r.text.splitlines():
                 if 'og:image' in line:
