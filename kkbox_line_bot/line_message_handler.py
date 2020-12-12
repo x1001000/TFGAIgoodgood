@@ -49,12 +49,9 @@ def handle_text_message(event):
                 reply = TextSendMessage(text=who)
         elif '口罩' in msg_txt:
             reply = TextSendMessage(text='geobingan.info/#/event/mask')
-        else:
+        elif msg_txt.count('讚') + msg_txt.count('👍'):
             reply = []
-            urls = ig_urls()
-            likes = msg_txt.count('讚') + msg_txt.count('👍')
-            count = likes if likes < len(urls) else len(urls)
-            for url in urls[:count]:#random.sample(urls, count):
+            for url in random.sample(ig_urls(), 5):
                 #reply.append(TextSendMessage(text=url))
                 reply.append(ImageSendMessage(
                     original_content_url=url,
