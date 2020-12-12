@@ -23,7 +23,7 @@ def ig():
             r = requests.get(url, headers=headers)
             for line in r.text.splitlines():
                 #if 'og:image' in line:
-                return r.text#.split('"')[-2]
+                return line#.split('"')[-2]
 
 @webhook_handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
