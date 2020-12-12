@@ -21,7 +21,7 @@ def ig_urls():
             urls = []
             for display_url in line.split('display_url":"')[1:]:
                 urls.append(display_url.split('"')[0].replace('\\u0026', '&'))
-            print(urls)
+            #print(urls)
             return urls
 
 @webhook_handler.add(MessageEvent, message=TextMessage)
@@ -51,12 +51,13 @@ def handle_text_message(event):
             reply = TextSendMessage(text='geobingan.info/#/event/mask')
         else:
             reply = []
-            count = msg_txt.count('讚') if msg_txt.count('讚') <= 70 else 70
-            for url in random.sample(ig_urls(), count):
-                reply.append(TextSendMessage(text=url))
-                #reply.append(ImageSendMessage(
-                #    original_content_url=url,
-                #    preview_image_url=url))
+            urls = ig_urls()
+            count = msg_txt.count('讚') if msg_txt.count('讚') < len(urls) else len(urls)
+            for url in random.sample(urls, count):
+                #reply.append(TextSendMessage(text=url))
+                reply.append(ImageSendMessage(
+                    original_content_url=url,
+                    preview_image_url=url))
             #resp = olami_svc(msg_txt[2:])
             #reply = resp.as_line_messages()
         #if event.source.user_id == 'U277d1a8cf7717e27e5d7d46971a64f65':
