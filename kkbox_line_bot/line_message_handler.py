@@ -17,7 +17,10 @@ def ig():
     for line in r.text.splitlines():
         if '>window._sharedData' in line:
             shortcode = random.choice(line.split('shortcode":"')[1:])[:11]
-            return f'instagram.com/p/{shortcode}'
+            r = requests.get(f'https://www.instagram.com/p/{shortcode}')
+            for line in r.text.splitlines():
+                if 'og:image' in line:
+                    return f'https://www.instagram.com/p/{shortcode}'#line.split('"')[-2]
 
 @webhook_handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
@@ -46,6 +49,9 @@ def handle_text_message(event):
             reply = TextSendMessage(text='geobingan.info/#/event/mask')
         elif '讚讚' in msg_txt:
             reply = TextSendMessage(text=ig())
+            #reply = ImageSendMessage(
+            #    original_content_url=ig(),
+            #    preview_image_url=ig())
             #resp = olami_svc(msg_txt[2:])
             #reply = resp.as_line_messages()
         #if event.source.user_id == 'U277d1a8cf7717e27e5d7d46971a64f65':
