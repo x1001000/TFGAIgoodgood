@@ -22,8 +22,8 @@ def ig():
             url = 'https://www.instagram.com/p/'+shortcode
             r = requests.get(url, headers=headers)
             for line in r.text.splitlines():
-                if 'og:image' in line:
-                    return line#.split('"')[-2]
+                #if 'og:image' in line:
+                return line#.split('"')[-2]
 
 @webhook_handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
