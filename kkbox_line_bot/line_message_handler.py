@@ -51,10 +51,10 @@ def handle_text_message(event):
         else:
             reply = []
             count = msg_txt.count('讚') if msg_txt.count('讚') <= 70 else 70
-            for url in random.sample(ig_urls(), count)
-            reply.append(ImageSendMessage(
-                original_content_url=url,
-                preview_image_url=url))
+            for url in random.sample(ig_urls(), count):
+                reply.append(ImageSendMessage(
+                    original_content_url=url,
+                    preview_image_url=url))
             #resp = olami_svc(msg_txt[2:])
             #reply = resp.as_line_messages()
         #if event.source.user_id == 'U277d1a8cf7717e27e5d7d46971a64f65':
