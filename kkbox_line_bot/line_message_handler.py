@@ -13,15 +13,17 @@ line_bot_api = LineBotApi(app.config['LINE_CHANNEL_ACCESS_TOKEN'])
 webhook_handler = WebhookHandler(app.config['LINE_CHANNEL_SECRET'])
 
 def ig():
-    r = requests.get('https://www.instagram.com/explore/locations/262402199/')
+    url = 'https://www.instagram.com/explore/locations/262402199/'
+    headers = {'user-agent': 'Fox Mulder'}
+    r = requests.get(url, headers=headers)
     for line in r.text.splitlines():
         if '>window._sharedData' in line:
             shortcode = random.choice(line.split('shortcode":"')[1:])[:11]
-            return 'TEST'
-            #r = requests.get(f'https://www.instagram.com/p/{shortcode}')
-            #for line in r.text.splitlines():
-            #    if 'og:image' in line:
-            #        return f'https://www.instagram.com/p/{shortcode}'#line.split('"')[-2]
+            url = 'https://www.instagram.com/p/'+shortcode
+            r = requests.get(url, headers=headers)
+            for line in r.text.splitlines():
+                if 'og:image' in line:
+                    return line.split('"')[-2]
 
 @webhook_handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
