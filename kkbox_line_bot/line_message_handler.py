@@ -52,7 +52,8 @@ def handle_text_message(event):
         else:
             reply = []
             urls = ig_urls()
-            count = msg_txt.count('讚') if msg_txt.count('讚') < len(urls) else len(urls)
+            likes = msg_txt.count('讚') + msg_txt.count('👍')
+            count = likes if likes < len(urls) else len(urls)
             for url in urls[:count]:#random.sample(urls, count):
                 #reply.append(TextSendMessage(text=url))
                 reply.append(ImageSendMessage(
