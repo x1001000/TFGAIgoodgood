@@ -50,7 +50,8 @@ def handle_text_message(event):
             reply = TextSendMessage(text='geobingan.info/#/event/mask')
         else:
             reply = []
-            for url in random.sample(ig_urls(), msg_txt.count('讚'))
+            count = msg_txt.count('讚') if msg_txt.count('讚') <= 70 else 70
+            for url in random.sample(ig_urls(), count)
             reply.append(ImageSendMessage(
                 original_content_url=url,
                 preview_image_url=url))
