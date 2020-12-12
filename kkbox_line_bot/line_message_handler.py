@@ -12,18 +12,16 @@ logger = logging.getLogger(__name__)
 line_bot_api = LineBotApi(app.config['LINE_CHANNEL_ACCESS_TOKEN'])
 webhook_handler = WebhookHandler(app.config['LINE_CHANNEL_SECRET'])
 
-def ig():
+def ig_urls():
     url = 'https://www.instagram.com/explore/locations/262402199/'
     headers = {'user-agent': 'Fox Mulder'}
     r = requests.get(url, headers=headers)
     for line in r.text.splitlines():
         if '>window._sharedData' in line:
-            shortcode = random.choice(line.split('shortcode":"')[1:])[:11]
-            url = 'https://www.instagram.com/p/'+shortcode
-            r = requests.get(url, headers=headers)
-            for line in r.text.splitlines():
-                if 'og:image' in line:
-                    return 'TEST'#.split('"')[-2]
+            urls = []
+            for display_url in line.split('display_url":"')[1:]:
+                urls.append(display_url.split('"')[0].replace('\u0026', '&'))
+            return urls
 
 @webhook_handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
@@ -50,11 +48,12 @@ def handle_text_message(event):
                 reply = TextSendMessage(text=who)
         elif '口罩' in msg_txt:
             reply = TextSendMessage(text='geobingan.info/#/event/mask')
-        elif '讚讚' in msg_txt:
-            reply = TextSendMessage(text=ig())
-            #reply = ImageSendMessage(
-            #    original_content_url=ig(),
-            #    preview_image_url=ig())
+        else:
+            reply = []
+            for url in random.sample(ig_urls(), msg_txt.count('讚'))
+            reply.append(ImageSendMessage(
+                original_content_url=url,
+                preview_image_url=url))
             #resp = olami_svc(msg_txt[2:])
             #reply = resp.as_line_messages()
         #if event.source.user_id == 'U277d1a8cf7717e27e5d7d46971a64f65':
