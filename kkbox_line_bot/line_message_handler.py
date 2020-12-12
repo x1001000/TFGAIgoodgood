@@ -21,6 +21,7 @@ def ig_urls():
             urls = []
             for display_url in line.split('display_url":"')[1:]:
                 urls.append(display_url.split('"')[0].replace('\u0026', '&'))
+            print(urls)
             return urls
 
 @webhook_handler.add(MessageEvent, message=TextMessage)
