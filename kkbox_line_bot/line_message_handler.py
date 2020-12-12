@@ -52,7 +52,7 @@ def handle_text_message(event):
             reply = []
             count = msg_txt.count('讚') if msg_txt.count('讚') <= 70 else 70
             for url in random.sample(ig_urls(), count):
-                reply = TextSendMessage(text=url)
+                reply.append(TextSendMessage(text=url))
                 #reply.append(ImageSendMessage(
                 #    original_content_url=url,
                 #    preview_image_url=url))
