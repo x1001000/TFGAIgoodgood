@@ -20,7 +20,7 @@ def ig_urls():
         if '>window._sharedData' in line:
             urls = []
             for display_url in line.split('display_url":"')[1:]:
-                urls.append(display_url.split('"')[0].replace('\u0026', '&'))
+                urls.append(display_url.split('"')[0].replace('\\u0026', '&'))
             print(urls)
             return urls
 
