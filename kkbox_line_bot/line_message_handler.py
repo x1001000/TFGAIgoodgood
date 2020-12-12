@@ -20,10 +20,11 @@ def ig():
         if '>window._sharedData' in line:
             shortcode = random.choice(line.split('shortcode":"')[1:])[:11]
             url = 'https://www.instagram.com/p/'+shortcode
+            return url
             r = requests.get(url, headers=headers)
             for line in r.text.splitlines():
                 if 'og:image' in line:
-                    return line#.split('"')[-2]
+                    return line.split('"')[-2]
 
 @webhook_handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
