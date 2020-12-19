@@ -9,8 +9,8 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageMess
 
 logger = logging.getLogger(__name__)
 
-line_bot_api = LineBotApi(app.config['LINE_CHANNEL_ACCESS_TOKEN'])
 webhook_handler = WebhookHandler(app.config['LINE_CHANNEL_SECRET'])
+line_bot_api = LineBotApi(app.config['LINE_CHANNEL_ACCESS_TOKEN'])
 
 def ig_urls():
     url = 'https://www.instagram.com/explore/locations/262402199/'
